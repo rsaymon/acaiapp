@@ -6,7 +6,7 @@ import Routes from './routes';
 
 const App: React.FC = () => (
   <NavigationContainer>
-    <StatusBar barStyle="light-content" backgroundColor="#3C015F" />
+    <StatusBar barStyle="light-content" backgroundColor="#828238" />
     <View
       // eslint-disable-next-line react-native/no-inline-styles
       style={{

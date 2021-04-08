@@ -10,7 +10,7 @@ const SignIn: React.FC = () => {
   return (
     <>
       <Container>
-        <Image source={require('../../assets/logoacaiapp.png')} />
+        <Image source={require('../../assets/logotuira.png')} />
         <Title>Faça seu login</Title>
 
         <Input name="email" icon="mail" placeholder="E-mail" />
