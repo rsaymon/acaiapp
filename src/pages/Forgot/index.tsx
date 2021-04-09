@@ -40,7 +40,14 @@ const SignIn: React.FC = () => {
               <Title>Digite seu e-mail</Title>
             </View>
             <Form ref={formRef} onSubmit={handleSignIn}>
-              <Input name="email" icon="mail" placeholder="E-mail" />
+              <Input
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+              />
               <Button
                 onPress={() => {
                   formRef.current?.submitForm();

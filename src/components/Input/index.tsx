@@ -1,4 +1,5 @@
-import React, {useEffect, useRef} from 'react';
+// useImperativeHandle -> informação do filho pro pai
+import React, {useEffect, useRef, useImperativeHandle, forwardRef} from 'react';
 import {TextInputProps} from 'react-native';
 import {useField} from '@unform/core';
 
@@ -12,10 +13,23 @@ interface InputValueReference {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({name, icon, ...rest}) => {
+interface InputRef {
+  focus(): void;
+}
+
+const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
+  {name, icon, ...rest},
+  ref,
+) => {
   const inputElementRef = useRef<any>(null);
   const {registerField, defaultValue, fieldName} = useField(name);
   const inputValueRef = useRef<InputValueReference>({value: defaultValue});
+
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputElementRef.current.focus();
+    },
+  }));
 
   useEffect(() => {
     registerField({
@@ -45,4 +59,4 @@ const Input: React.FC<InputProps> = ({name, icon, ...rest}) => {
     </Container>
   );
 };
-export default Input;
+export default forwardRef(Input);

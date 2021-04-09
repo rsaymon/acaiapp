@@ -2,7 +2,13 @@
 import React, {useRef} from 'react';
 import {Form} from '@unform/mobile';
 import {FormHandles} from '@unform/core';
-import {View, ScrollView, KeyboardAvoidingView, Platform} from 'react-native';
+import {
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/core';
 
@@ -18,6 +24,13 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+  const cityInputRef = useRef<TextInput>(null);
+  const districtInputRef = useRef<TextInput>(null);
+  const addressInputRef = useRef<TextInput>(null);
+  const numberInputRef = useRef<TextInput>(null);
+  const complementInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
   const formRef = useRef<FormHandles>(null);
   return (
@@ -40,21 +53,101 @@ const SignUp: React.FC = () => {
               onSubmit={data => {
                 console.log(data);
               }}>
-              <Input name="name" icon="user" placeholder="Nome" />
-              <Input name="email" icon="mail" placeholder="E-mail" />
-              <Input name="password" icon="lock" placeholder="Senha" />
+              <Input
+                name="name"
+                icon="user"
+                placeholder="Nome"
+                autoCapitalize="words"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  emailInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={emailInputRef}
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={passwordInputRef}
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+                secureTextEntry
+                textContentType="newPassword"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  cityInputRef.current?.focus();
+                }}
+              />
               <View>
                 <Title>Informações de endereço</Title>
               </View>
-              <Input name="city" icon="map-pin" placeholder="Cidade" />
-              <Input name="district" icon="map-pin" placeholder="Bairro" />
               <Input
+                ref={cityInputRef}
+                name="city"
+                icon="map-pin"
+                placeholder="Cidade"
+                autoCorrect={true}
+                autoCapitalize="words"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  districtInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={districtInputRef}
+                name="district"
+                icon="map-pin"
+                placeholder="Bairro"
+                autoCorrect={false}
+                autoCapitalize="words"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  addressInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={addressInputRef}
                 name="address"
                 icon="map-pin"
                 placeholder="Rua / Avenida"
+                autoCorrect={true}
+                autoCapitalize="words"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  numberInputRef.current?.focus();
+                }}
               />
-              <InputHalf name="number" icon="map-pin" placeholder="Número" />
-              <Input name="district" icon="map-pin" placeholder="Complemento" />
+              <InputHalf
+                ref={numberInputRef}
+                name="number"
+                icon="map-pin"
+                placeholder="Número"
+                keyboardType="numeric"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  complementInputRef.current?.focus();
+                }}
+              />
+              <Input
+                ref={complementInputRef}
+                name="complement"
+                icon="map-pin"
+                placeholder="Complemento"
+                returnKeyType="send"
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
+              />
 
               <Button
                 onPress={() => {
