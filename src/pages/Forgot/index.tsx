@@ -11,10 +11,8 @@ import Input from '../../components/Input';
 import {
   Container,
   Title,
-  ForgotPassword,
-  ForgotPasswordText,
-  CreateAccountButton,
-  CreateAccountButtonText,
+  BackToSignIn,
+  BackToSignInText,
   ImageLogo,
 } from './styles';
 
@@ -39,34 +37,27 @@ const SignIn: React.FC = () => {
             <ImageLogo source={require('../../assets/logotuira.png')} />
             {/* View por volta do texto para que o texto tenha estilização*/}
             <View>
-              <Title>Faça seu login</Title>
+              <Title>Digite seu e-mail</Title>
             </View>
             <Form ref={formRef} onSubmit={handleSignIn}>
               <Input name="email" icon="mail" placeholder="E-mail" />
-              <Input name="password" icon="lock" placeholder="Senha" />
               <Button
                 onPress={() => {
                   formRef.current?.submitForm();
                 }}>
-                Entrar
+                Recuperar Senha
               </Button>
             </Form>
-            <ForgotPassword
-              onPress={() => {
-                navigation.navigate('Forgot');
-              }}>
-              <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-            </ForgotPassword>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-      <CreateAccountButton
+      <BackToSignIn
         onPress={() => {
-          navigation.navigate('SignUp');
+          navigation.navigate('SignIn');
         }}>
-        <Icon name="log-in" size={20} color="#f4ede8" />
-        <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-      </CreateAccountButton>
+        <Icon name="arrow-left" size={20} color="#f4ede8" />
+        <BackToSignInText>Voltar para o login</BackToSignInText>
+      </BackToSignIn>
     </>
   );
 };
